@@ -1,66 +1,80 @@
-## Foundry
+# Foundry Smart Contract Lottery
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+This project is a decentralized lottery (raffle) system built with Solidity and tested using Foundry. It leverages Chainlink VRF for verifiable randomness and is designed for educational and demonstration purposes.
 
-Foundry consists of:
+## Features
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+- Decentralized lottery contract (`Raffle.sol`)
+- Chainlink VRF integration for randomness
+- Automated testing with Foundry
+- Mock contracts for local testing
+- Deployment and interaction scripts
 
-## Documentation
+## Project Structure
 
-https://book.getfoundry.sh/
-
-## Usage
-
-### Build
-
-```shell
-$ forge build
+```
+├── src/                # Main contract source code
+│   └── Raffle.sol      # Lottery contract
+├── script/             # Deployment and helper scripts
+│   ├── DeployRaffle.s.sol
+│   ├── HelperConfig.s.sol
+│   └── Interactions.s.sol
+├── test/               # Test contracts
+│   ├── unit/           # Unit tests
+│   │   └── RaffleTest.t.sol
+│   └── mocks/          # Mock contracts (e.g., LinkToken)
+├── lib/                # External dependencies (Chainlink, Forge Std, etc.)
+├── foundry.toml        # Foundry configuration
+├── Makefile            # Common build/test commands
+└── README.md           # Project documentation
 ```
 
-### Test
+## Getting Started
 
-```shell
-$ forge test
+### Prerequisites
+
+- [Foundry](https://book.getfoundry.sh/) (install with `curl -L https://foundry.paradigm.xyz | bash`)
+- Node.js (for some scripts, optional)
+
+### Install Dependencies
+
+```sh
+forge install
 ```
 
-### Format
+### Build Contracts
 
-```shell
-$ forge fmt
+```sh
+forge build
 ```
 
-### Gas Snapshots
+### Run Tests
 
-```shell
-$ forge snapshot
+```sh
+forge test
 ```
 
-### Anvil
+### Deploy Locally
 
-```shell
-$ anvil
+```sh
+forge script script/DeployRaffle.s.sol --fork-url <YOUR_RPC_URL> --broadcast
 ```
 
-### Deploy
+### Directory Details
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
+- `src/`: Main contract(s)
+- `script/`: Deployment and helper scripts
+- `test/`: Solidity-based tests and mocks
+- `lib/`: External libraries (Chainlink, Forge Std, etc.)
 
-### Cast
+## Chainlink VRF
 
-```shell
-$ cast <subcommand>
-```
+This project uses Chainlink VRF for randomness. For local testing, a mock VRF coordinator is used. For testnets/mainnet, configure your VRF subscription and coordinator address in `HelperConfig.s.sol`.
 
-### Help
+## License
 
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+MIT
+
+---
+
+Feel free to contribute or fork for your own learning and experimentation!
